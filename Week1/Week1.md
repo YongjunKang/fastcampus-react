@@ -25,8 +25,8 @@ npm ci 입력 시 package-lock.json의 모든 데이터를 다운받아옴
 
 ##### let은 var의 문제를 해결
 1. 블록 레벨 스코프
-2. 중복 선언 => syntax error
-3. 호이스팅 => syntax error
+2. 중복 선언 => syntax error (런타임 시작하면서 문법적으로 문제가 있으므로 에러 출력)
+3. 호이스팅 => syntax error (위에서 선언하지 않은 변수를 밑에서 참조할 수 없게 되어있다.)
 
 ```js
 // 중복선언 => SyntaxError
@@ -71,10 +71,12 @@ f;
 }
 ```
 Primitive Type(원시타입) : 데이터의 실제값 할당 (데이터 값이 복사)
-종류 : Boolean, number, String, null, undefined
+종류 : Boolean, number, String, null, undefined [Object 타입을 제외한 나머지]
 
 Reference Type(참조타입) : 데이터의 위치 값만 할당 (데이터의 참조가 복사)
 종류 : Object (array, function, object)
+
+const를 사용하는 이유 => 다른사람에게 얘는 밑에서 가리키는 대상이 바뀌지 않는다고 확신을 시켜주는 것
 
 ----
 
@@ -268,8 +270,8 @@ function foo() {
 }
 
 (async () => {
-    await foo();
-    console.log('end');
+    await foo(); // 비동기 함수 실행 (Promise를 리턴)
+    console.log('end'); // 위에서 resolve가 되야 실행된다.
     console.log('이것이 먼저 실행');
 })();
 ```
@@ -292,7 +294,7 @@ function* foo() {
     console.log(3.5);
 }
 
-const g = foo();
+const g = foo(); // g가 제너레이터 객체가 된다.
 console.log(g.next().value); //0.5
 console.log(g.next().value); // 1 1.5
 console.log(g.next().value); // 2 2.5
@@ -300,7 +302,8 @@ console.log(g.next().value); // 3 3.5
 console.log(g.next().value); // undefined
 ```
 
-예시로 운전대를 내가 잡고 yield 1까지 진행 다음 사람에게 운전대를 주고 yield 2까지 진행한다.
+예시로 운전대를 내가 잡고 yield(일드) 1까지 진행 다음 사람에게(next) 운전대를 주고 yield 2까지 진행한다.
+React에서 제너레이터 객체를 잘 활용하는 라이브러리로 redux-saga가 있다.
 
 ```js
 // 핸들
@@ -309,7 +312,7 @@ let handle = null;
 // 비동기 함수
 function bar() {
     setTimeout(() => {
-        handle.next('hello');
+        handle.next('hello'); // handle을 1초후에 next 한다.
     }, 1000);
 }
 
@@ -319,7 +322,7 @@ function* baz() {
     console.log(text);
 }
 
-handle = baz();
+handle = baz(); // baz 함수의 결과를 handle에 담는다.
 handle.next();
 
 //{value: undefined, done: false}
@@ -331,7 +334,7 @@ handle.next();
 
 ##### Keyword
 + __Angular__ vs __React__ vs __Vue__
-+ View 를 다루는 라이브러리
++ View 를 다루는 라이브러리 (리액트가 주목하고자 하는건 브라우저에 얼마나 빠르고 잘 그릴 수 있는지 이다.)
 + Only Rendering & Update
     * NOT included another functionality(ex. http client, ...);
 + Component Based Development
@@ -343,6 +346,18 @@ handle.next();
     * NOT Templates
     * transpile to JS(Babel, TypeScript)
 + CSR & SSR
+
+---
+
+Angular = 프레임워크
+React = 라이브러리
+Vue = 프레임워크와 라이브러리가 혼합되어있다.
+
+프레임워크 => 모든것이 다 들어있고 프레임워크가 돌아가는것에 내가 어느 부분만 끼워 넣으면 되는것
+라이브러리 => 그 라이브러리가 다루는 기능을 우리가 사용하는것
+
+ex) http client로 API를 호출할때, Angular는 내장 모듈을 사용하면 된다.
+하지만 React와 Vue는 내장 모듈이 없으므로 라이브러리를 사용하거나 직접 작성해야한다.
 
 ---
 
