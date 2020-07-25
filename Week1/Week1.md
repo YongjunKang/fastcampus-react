@@ -295,7 +295,7 @@ function* foo() {
 }
 
 const g = foo(); // g가 제너레이터 객체가 된다.
-console.log(g.next().value); //0.5
+console.log(g.next().value); // 0.5
 console.log(g.next().value); // 1 1.5
 console.log(g.next().value); // 2 2.5
 console.log(g.next().value); // 3 3.5
@@ -420,7 +420,7 @@ JSX 문법으로 작성된 코드는 순수한 JavaScript로 컴파일 하여 �
 
 ```
 npx create-react-app tic-tac-toe
-// tic-tac-toe 앱을 만들기 위해 필요한 모든 패키지를 다운 받는다.
+// 리액트앱을 만들기 위해 필요한 기본적인 모든 패키지를 다운 받는다.
 ```
 
 __npx__
@@ -441,7 +441,7 @@ npx create-react-app 프로젝트이름
 
 컴포넌트 : 컴포넌트는 독립적인 단위모듈이다.
 
-Hook을 간단하게 요약하면 class를 쓰지 않고, function에서 state를 운용할 수 있는 기능ㅇ이다.
+Hook을 간단하게 요약하면 class를 쓰지 않고, function에서 state를 운용할 수 있는 기능이다.
 
 __Hooks 이전__
 + 컴포넌트 내부에 상태가 있다면?
