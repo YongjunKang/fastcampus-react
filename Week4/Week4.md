@@ -622,7 +622,7 @@ export default function Error() {
 `state`를 다른 값으로 바꿔서 실행을 할 수 있게 도와준다.
 ```js
 // components/Counter.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Counter() {
     const [count, setCount] = React.useState(0);
